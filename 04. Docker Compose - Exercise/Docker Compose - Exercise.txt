@@ -1,0 +1,53 @@
+1. Lightstreamer
+docker run -d --name ls-server -p 80:8080 lightstreamer:latest
+
+2. Ghost
+docker run -d --name ghost-container -e NODE_ENV=development -p 3001:2368 ghost
+
+3. Apache HTTP Server Container
+docker run -d --name my-apache-app -v ${PWD}\apache/data:/usr/local/apache2/htdocs/ -p 8080:80 httpd:latest
+echo "hello" > ${PWD}/apache/data/test.txt
+
+4. SQL Server Container
+
+docker run -d `
+ -e ACCEPT_EULLA=Y `
+ -e MSSQL_SA_PASSWORD=yourStringPassword12# `
+ -p 1433:1433 `
+ -v sqldata:/var/opt/mssql `
+ mcr.microsoft.com/mssql/server
+
+5. MariaDB Client and Server in a Network
+
+5.1 Create common network for both containers
+
+docker create networ kmy_network
+
+5.2 Start the first mariadbcontaner, called mariadb_server
+
+docker run -d `
+--name mariadb_server `
+--network my_network `
+--env MARIADB_USER=example-user `
+--env MARIADB_PASSWORD=my_cool_secret `
+--env MARIADB_ROOT_PASSWORD=my-secret-pw `
+mariadb
+
+5.3 Start the second mariadbcontaner, called mariadb_client
+
+docker run -d `
+--name mariadb_client `
+--network my_network `
+--env MARIADB_ROOT_PASSWORD=my-secret-pw `
+mariadb
+
+5.4 Docker network inspect my_network
+To check if  both containers are in the created network
+
+5.5 Attach to mariadb_client terminal
+docker exec -it mariadb_client /bin/bash 
+
+5.6 Get access from mariadb_client to mariadb_server
+
+mariadb -h mariadb_server -u example-user -p
+password : my_top_secret
