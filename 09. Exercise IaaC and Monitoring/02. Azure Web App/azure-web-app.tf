@@ -7,24 +7,24 @@ terraform {
   }
 }
 
-# Configure the Microsoft Azure Provider
+# 1. Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
 }
 
-# Add Random Integer Resource
+# 2. Add Random Integer Resource
 resource "random_integer" "ri" {
     min = 10000
     max = 99999
 }
   
-# Create a resource group
+# 3. Create a resource group
 resource "azurerm_resource_group" "rg" {
   name     = "ContactBookRG${random_integer.ri.result}"
   location = "West Europe"
 }
 
-# Create the Linux App Service Plan
+# 4. Create the Linux App Service Plan
 resource "azurerm_service_plan" "appsp" {
   name                = "contact-book-plan-${random_integer.ri.result}"
   resource_group_name = azurerm_resource_group.rg.name
@@ -33,7 +33,7 @@ resource "azurerm_service_plan" "appsp" {
   sku_name            = "F1"
 }
 
-# Create the web app, pass in the App Service Plan ID
+# 5. Create the web app, pass in the App Service Plan ID
 resource "azurerm_linux_web_app" "appservice" {
   name                  = "contact-book-${random_integer.ri.result}"
   resource_group_name   = azurerm_resource_group.rg.name
@@ -49,11 +49,13 @@ resource "azurerm_linux_web_app" "appservice" {
   }
 }
 
-#  Deploy code from a public GitHub repo
+#  6. Deploy code from a public GitHub repo
 resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id             = azurerm_linux_web_app.appservice.id
   repo_url           = "https://github.com/nakov/ContactBook"
   branch             = "master"
   use_manual_integration = true
- 
+
 }
+
+
