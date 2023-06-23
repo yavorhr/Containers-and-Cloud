@@ -1,3 +1,4 @@
+![](https://camo.githubusercontent.com/42a8354a436ef9f08168b5b971dbc7646ab3abfdf1056db81c3bdd5734b97e9f/68747470733a2f2f6e616b6f762e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031342f30312f536f6674776172652d556e69766572736974792d4c6f676f2d626c75652d686f72697a6f6e74616c2e706e67)
 
 # Containers and Cloud - May 2023 
 
@@ -23,4 +24,6 @@ The main goal of the [Containers and Cloud](https://softuni.bg/trainings/4117/co
 - Deployment to Cloud 
 - Infrastructure as a Code 
 - App Monitoring Tools  
-- IaaC and Monitoring 
+- IaaC and Monitoring
+  
+![Containers and Cloud - May 2023 - Certificate](https://github.com/yavorhr/Containers-and-Cloud/assets/76119513/a596be91-57d8-44e7-b646-91293a30a339)
